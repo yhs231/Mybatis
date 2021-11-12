@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!--配置顺序(properties?,settings?,typeAliases?,typeHandlers?,
+           objectFactory?,objectWrapperFactory?,reflectorFactory?
+           ,plugins?,environments?,databaseIdProvider?,mappers?)
+-->
+<!--导入外部资源-->
+    <properties resource="db.properties" />
+<!--    属性配置 例：日志工厂，日志用于排错-->
+    <settings >
+<!--        标准的日志工厂 STDOUT_LOGGING-->
+       <setting name="logImpl" value="STDOUT_LOGGING"/>
+<!--        <setting name="logImpl" value="LOG4J"/>-->
+    </settings>
+    
+
+<!-- 起别名，缩减长度-->
+    <typeAliases>
+<!--        第一种，具体类-->
+<!--        <typeAlias type="cn.edu.ncu.yhs.pojo.User" alias="user"/>-->
+<!--        第二种，包名,一般是对相应类的小写字母开头-->
+        <package name="cn.edu.ncu.yhs.pojo" />
+    </typeAliases>
+
+
+    <environments default="test">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;characterEncoding=UTF8&amp;serverTimezone=Asia/Shanghai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+<!--实现接口-->
+<!--    注解方式实现mybatis应用于简单的mybatis-->
+<!--<mappers>-->
+<!--    <mapper class="cn.edu.ncu.yhs.dao.UserMapper"/>-->
+<!--</mappers>-->
+<mappers>
+    <mapper class="cn.edu.ncu.yhs.dao.TeacherMapper"/>
+    <mapper class="cn.edu.ncu.yhs.dao.StudentMapper"/>
+</mappers>
+
+
+
+
+
+
+</configuration>
